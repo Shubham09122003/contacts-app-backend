@@ -40,9 +40,6 @@ const generateToken = (user_id) => {
 };
 
 const checkToken = (req, res, next) => {
-  // console.log("hi");
-
-  // console.log(req.headers);
 
   let token = req.headers.authorization;
 
@@ -53,7 +50,6 @@ const checkToken = (req, res, next) => {
     });
   }
 
-  // console.log(token);
 
   // check validity of the token
   try {
@@ -165,9 +161,7 @@ app.post("/login", (req, res) => {
 
 // CONTACTS API
 app.get("/get-contacts", checkToken, (req, res) => {
-  // assuming we are getting _id of logged in person
   const user_id = req.user_id;
-  // const user_id = req.params.user_id;
 
   Contact.find({
     user_id,
@@ -188,7 +182,6 @@ app.get("/get-contacts", checkToken, (req, res) => {
 });
 
 app.post("/add-contact", checkToken, (req, res) => {
-  // const user_id = req.params.user_id;
   const user_id = req.user_id;
   const name = req.body.name;
   const number = req.body.number;
@@ -213,7 +206,6 @@ app.post("/add-contact", checkToken, (req, res) => {
   });
 });
 
-// change http method later
 app.patch("/update-contact/:contact_id", checkToken, (req, res) => {
   const contact_id = req.params.contact_id;
   const number = req.body.number;
